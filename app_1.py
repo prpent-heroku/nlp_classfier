@@ -109,24 +109,7 @@ def home_page_module():
     st.write("Usefullness: News is all around us through the internet or Television keeping us up to date on the daily events as they happen. There are over 5000 news articles published just in the United States every day [1]. The amount of News articles available to consumers can be overwhelming and requires a process to classify them, this helps the reader to focus on the articles that are of interest to them. This process filters the news articles to an extent but in addition to news topic classification, we would like to provide a suggested sentiment on a news article such that the consumer has an additional piece of information before reading the article and potentially decide on whether to read the article.")
    
     st.write("Build By Fall 2022 NLP Team: Agalya Velusamy, Pravallika Pentapati and Srikanth Bolishetty")
-    #st.image(show_wordcloud(text))
-# def normalize_document(doc):
-#  # lower case and remove special characters\whitespaces
-#      doc = re.sub(r'[^a-zA-Z0-9\s]', '', doc, re.I|re.A)
-#      doc = doc.lower()
-#      doc = doc.strip()
-#      stop_words = stopwords.words('english')
-#      tokens = nltk.word_tokenize(doc)
-#      # remove stopwords
-#      filtered_tokens = [token for token in tokens if token not in stop_words]
-#      # remvoe punctuation
-#      filtered_tokens = [word.lower() for word in filtered_tokens if word.isalpha()]
-#      # Lemmatization
-#      lemmatizer = WordNetLemmatizer()
-#      filtered_tokens = [lemmatizer.lemmatize(word) for word in filtered_tokens]
-#      doc = ' '.join(filtered_tokens)
-     
-     #return doc
+
 def nlp_task():
     # Applying TFIDF
     # vectorizer = TfidfVectorizer(ngram_range = (3,3))
@@ -141,6 +124,14 @@ def nlp_task():
          st.info("Original Text::\n{}".format(raw_text))
 
          docx = nlp(raw_text)
+          st.title("Natural Language Processing")
+    raw_text = st.text_area("Enter News Here","Type Here")
+    nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
+    task_choice = st.selectbox("Choose NLP Task",nlp_task)
+    if st.button("Analyze"):
+         st.info("Original Text::\n{}".format(raw_text))
+
+         docx = nlp(raw_text)
          if task_choice == 'Tokenization':
              st.caption("Result:")
              result = [token.text for token in docx ]
@@ -148,10 +139,12 @@ def nlp_task():
          elif task_choice == 'Lemmatization':
              result = ["'Token':{},'Lemma':{}".format(token.text,token.lemma_) for token in docx]
              st.text(result)
+            
          elif task_choice == 'Named Entity Recognition':
              for entity in docx.ents:
-                 result=[f"{entity.text:-<{20}}{entity.label_:-<{20}}{str(spacy.explain(entity.label_))}"] 
-                 st.text(result)
+                   result=[entity.text,entity.label_]
+                   st.text(result)
+                
          elif task_choice == 'Parts Of Speech Tags':
                result = ["'Token':{},'POS':{},'Dependency':{}".format(word.text,word.tag_,word.dep_) for word in docx]
                st.json(result)  

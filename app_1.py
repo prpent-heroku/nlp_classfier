@@ -116,15 +116,7 @@ def nlp_task():
     # tfidf_model= vectorizer.fit_transform(text)
     # scores = (tfidf_model.toarray())
     # features = (vectorizer.get_feature_names())
-    st.title("Natural Language Processing")
-    raw_text = st.text_area("Enter News Here","Type Here")
-    nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
-    task_choice = st.selectbox("Choose NLP Task",nlp_task)
-    if st.button("Analyze"):
-         st.info("Original Text::\n{}".format(raw_text))
-
-         docx = nlp(raw_text)
-         st.title("Natural Language Processing")
+     st.title("Natural Language Processing")
     raw_text = st.text_area("Enter News Here","Type Here")
     nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
     task_choice = st.selectbox("Choose NLP Task",nlp_task)

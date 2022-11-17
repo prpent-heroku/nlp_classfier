@@ -124,7 +124,7 @@ def nlp_task():
          st.info("Original Text::\n{}".format(raw_text))
 
          docx = nlp(raw_text)
-          st.title("Natural Language Processing")
+         st.title("Natural Language Processing")
     raw_text = st.text_area("Enter News Here","Type Here")
     nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
     task_choice = st.selectbox("Choose NLP Task",nlp_task)

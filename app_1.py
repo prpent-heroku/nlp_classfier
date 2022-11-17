@@ -123,7 +123,7 @@ def nlp_task():
        task_choice = st.selectbox("Choose NLP Task",nlp_task)
        submit_button= st.form_submit_button("Analyze")
     if submit_button:
-         st.info("Original Text::\n{},Orginal NLP task::\n{}".format(raw_text,nlp_task))
+         st.info("Original Text::\n{},Orginal NLP task::\n{}".format(raw_text,task_choice))
          docx = nlp(raw_text)
          if task_choice == 'Tokenization':
              st.caption("Result:")

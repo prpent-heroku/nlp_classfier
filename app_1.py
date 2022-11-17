@@ -9,6 +9,7 @@ Editors:Pravallika
 # !pip install textblob
 #!pip install wordcloud
 
+spacy.cli.download("en")
 import streamlit as st 
 import joblib,os
 import spacy

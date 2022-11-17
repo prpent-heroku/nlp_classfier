@@ -138,7 +138,7 @@ def nlp_task():
              st.caption("Result:")
              tokens = [ token.text for token in docx]
              entities = [(entity.text,entity.label_)for entity in docx.ents]
-             result=['"Token":{},\n"Entities":{}'.format(tokens,entities)]
+             result=['"Token":{},"Entities":{}'.format(tokens,entities)]
              st.text(result)
                 
          elif task_choice == 'Parts Of Speech Tags':

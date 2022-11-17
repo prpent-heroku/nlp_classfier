@@ -121,9 +121,9 @@ def nlp_task():
        raw_text = st.text_area("Enter News Here","Type Here")
        nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
        task_choice = st.selectbox("Choose NLP Task",nlp_task)
-    if st.button("Analyze"):
+       submit_button= st.form_submit_button("Analyze")
+    if submit_button:
          st.info("Original Text::\n{}".format(raw_text))
-
          docx = nlp(raw_text)
          if task_choice == 'Tokenization':
              st.caption("Result:")

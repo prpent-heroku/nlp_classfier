@@ -9,12 +9,10 @@ Editors:Pravallika
 # !pip install textblob
 #!pip install wordcloud
 
-
 import streamlit as st 
 import joblib,os
 import spacy
 import pandas as pd
-spacy.cli.download("en")
 nlp = spacy.load('en_core_web_sm')
 import matplotlib.pyplot as plt 
 import matplotlib
@@ -25,14 +23,9 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import emoji
 from textblob import TextBlob
 import re
+import numpy as np
 
-def make_hashes(password):
-    return hashlib.sha256(str.encode(password)).hexdigest()
 
-def check_hashes(password,hashed_text):
-    if make_hashes(password) == hashed_text:
-        return hashed_text
-    return False
  # wordcloud function
 def show_wordcloud(data, title = None):
     from wordcloud import WordCloud,STOPWORDS
@@ -47,7 +40,7 @@ def show_wordcloud(data, title = None):
                repeat=False,
                stopwords=STOPWORDS).generate(' '.join(data))
 
-    plt.title("42 News Categories' Wordcloud", size=15, weight='bold')
+    plt.title("Word Cloud with Headlines", size=15, weight='bold')
     plt.imshow(wc, interpolation= "bilinear")
     plt.axis('off')
     st.pyplot(plt)
@@ -61,19 +54,41 @@ def plot_by_category(data):
     plt.xticks(rotation=90)
     st.pyplot(plt)
     
+    
+def plot_Top10_category(data):
+    cat_df = pd.DataFrame(data.value_counts()).reset_index()
+    cat_df.rename(columns={'index':'news_classes','category':'numcat'}, inplace=True)
+
+    # Visualize top 10 categories and proportion of each categories in dataset
+    plt.figure(figsize=(10,6))
+    ax = sns.barplot(np.array(cat_df.news_classes)[:10], np.array(cat_df.numcat)[:10])
+    for p in ax.patches:
+        ax.annotate(p.get_height(), (p.get_x()+0.01, p.get_height() + 50))
+    plt.title("TOP 10 Categories of News articles", size=15)
+    plt.xlabel("Categories of articles", size=14)
+    plt.xticks(rotation=45)
+    plt.ylabel("Number of articles", size=14)
+    st.pyplot(plt)  
+
+    
 def Visualization():
     st.info("Dataset Information:")
-    News = pd.read_json("News_Category_Dataset_v3.json",lines=True)
+    News = pd.read_json("News_Category_Dataset_v2.json",lines=True)
     st.write(News.head())
     st.write(News.shape)
     News['Headline_Combined']= News["headline"] +"" +News["short_description"]
-    plotChoice = st.sidebar.selectbox("Select the plot you want to see",["-- Choose One --","Number of headlines for each category","Top 10 News Categories","Display Word Cloud With Headlines"])
+    plotChoice = st.sidebar.selectbox("Select the plot you want to see",["Number of headlines for each category","Top 10 News Categories","Display Word Cloud With Headlines"])
     if plotChoice=="Number of headlines for each category":
         st.info("Number of headlines for each category")
         plot_by_category(News['category'])
+    elif plotChoice=="Display Word Cloud With Headlines":
+        st.info("Word Cloud with Headlines")
+        show_wordcloud(News['Headline_Combined'])
+        #show_wordcloud(News['category'])
     else:
-        st.write("under development")
-    #show_wordcloud(News['Headline_Combined'])
+        st.info("Display Top 10 News Categories")
+        plot_Top10_category(News['category'])
+    
     
    
 def clean_news(text):
@@ -154,12 +169,7 @@ def nlp_task():
              st.info("Polarity Score is:: {}".format(result))
                 
                 
-            
-     
-         
-
-
-    
+             
   
 def  prediction_task():
      st.info("News Category Prediction")
@@ -180,8 +190,8 @@ def main():
         nlp_task()
     elif choice=="Prediction Task": 
         prediction_task()
-#     elif choice=="Statistical Plots":
-# #        Visualization()
+    elif choice=="Statistical Plots":
+        Visualization()
     else:
         st.write("Under Development")
 if __name__ == '__main__':

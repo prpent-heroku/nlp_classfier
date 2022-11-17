@@ -129,20 +129,24 @@ def nlp_task():
              result = [token.text for token in docx ]
              st.text(result)
          elif task_choice == 'Lemmatization':
+             st.caption("Result:")
              result = ["'Token':{},'Lemma':{}".format(token.text,token.lemma_) for token in docx]
              st.text(result)
             
          elif task_choice == 'Named Entity Recognition':
              for entity in docx.ents:
+                   st.caption("Result:")
                    result=[entity.text,entity.label_]
                    st.text(result)
                 
          elif task_choice == 'Parts Of Speech Tags':
+               st.caption("Result:")
                result = ["'Token':{},'POS':{},'Dependency':{}".format(word.text,word.tag_,word.dep_) for word in docx]
                st.json(result)  
             
          elif task_choice=='Sentiment Analysis':
              analysis = TextBlob(clean_news(raw_text))
+             st.caption("Result:")
              result = analysis.sentiment.polarity
              if result > 0.0:
                  custom_emoji = ':smile:'

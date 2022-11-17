@@ -140,18 +140,21 @@ def nlp_task():
          elif task_choice == 'Parts Of Speech Tags':
                result = ["'Token':{},'POS':{},'Dependency':{}".format(word.text,word.tag_,word.dep_) for word in docx]
                st.json(result)  
-         elif task_choice=='Sentiment Analysis':
+            
+        elif task_choice=='Sentiment Analysis':
              analysis = TextBlob(clean_news(raw_text))
              result = analysis.sentiment.polarity
              if result > 0.0:
                  custom_emoji = ':smile:'
-                 st.write("smile",emoji.emojize(custom_emoji))
-             elif result < 0.0:
-                 custom_emoji = ':disappointed:'
-                 st.write("sad",emoji.emojize(custom_emoji))
+                 st.write("positive",emoji.emojize(custom_emoji))
+             elif result == 0.0:
+                st.write("neutral",emoji.emojize(':expressionless:'))
+               
              else:
-                 st.write("neutral",emoji.emojize(':expressionless:'))
-             st.info("Polarity Score is:: {}".format(result))
+                 custom_emoji = ':disappointed:'
+                 st.write("negative ",emoji.emojize(custom_emoji))
+                    
+             st.info("Polarity Score is:: {}".format(result)) 
                 
                 
              

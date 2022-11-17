@@ -136,10 +136,8 @@ def nlp_task():
          elif task_choice == 'Named Entity Recognition':
              sentences=list(docx.sents)
              st.caption("Result:")
-             tokens = [ token.text for token in docx]
              entities = [(entity.text,entity.label_)for entity in docx.ents]
-             result=['"Token":{},"Entities":{}'.format(tokens,entities)]
-             st.text(result)
+             st.text(entities)
                 
          elif task_choice == 'Parts Of Speech Tags':
                st.caption("Result:")

@@ -9,11 +9,12 @@ Editors:Pravallika
 # !pip install textblob
 #!pip install wordcloud
 
-spacy.cli.download("en")
+
 import streamlit as st 
 import joblib,os
 import spacy
 import pandas as pd
+spacy.cli.download("en")
 nlp = spacy.load('en_core_web_sm')
 import matplotlib.pyplot as plt 
 import matplotlib

@@ -11,6 +11,8 @@ from bs4 import BeautifulSoup
 import en_core_web_sm
 
 tokenizer = ToktokTokenizer()
+import nltk
+nltk.download('stopwords')
 stopword_list = nltk.corpus.stopwords.words('english')
 #nlp = spacy.load('en-core-web-sm')
 nlp = en_core_web_sm.load()

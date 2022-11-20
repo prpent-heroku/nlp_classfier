@@ -1,6 +1,5 @@
 beautifulsoup4==4.11.1
 emoji==2.2.0
-en_core_web_sm==3.3.0
 joblib==1.1.1
 matplotlib==3.3.2
 nltk==3.5

@@ -24,6 +24,13 @@ import emoji
 from textblob import TextBlob
 import re
 import numpy as np
+import text_normalizer as tn
+import warnings
+warnings.filterwarnings('ignore')
+import pickle
+import nltk
+stopword_list = nltk.corpus.stopwords.words('english')
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 
  # wordcloud function

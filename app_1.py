@@ -184,7 +184,9 @@ def  prediction_task():
                 message.text("Please Enter a Valid New Headline") 
             else:
                 message.text("In Process") 
-                tf1 = open("tfidf1.pkl", 'rb')
+                news_cv = open("tfidf1.pkl", 'rb')
+                tf1= joblib.load(news_cv)
+                
                 pickled_model = joblib.load(open('bestmodel.sav', 'rb'))
                 norm_corpus = tn.normalize_corpus(corpus=[user_headline], html_stripping=True, 
                                       accented_char_removal=True, text_lower_case=True, text_lemmatization=True, 

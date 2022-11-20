@@ -184,8 +184,8 @@ def  prediction_task():
                 message.text("Please Enter a Valid New Headline") 
             else:
                 message.text("In Process") 
-                tf1 = pickle.load(open("tfidf1.pkl", 'rb'))
-                pickled_model = pickle.load(open('bestmodel.sav', 'rb'))
+                tf1 = open("tfidf1.pkl", 'rb')
+                pickled_model = joblib.load(open('bestmodel.sav', 'rb'))
                 norm_corpus = tn.normalize_corpus(corpus=[user_headline], html_stripping=True, 
                                       accented_char_removal=True, text_lower_case=True, text_lemmatization=True, 
                                       text_stemming=False, special_char_removal=True, remove_digits=True,
@@ -196,7 +196,9 @@ def  prediction_task():
                 st.caption("Result:")
                 st.write("Topic: ",predictions[0])
                 st.write("Predicted with Probability %:",np.round(Predict_Probability[0]*100,2))
-                message.text("Request Complete")     
+                message.text("Request Complete") 
+                
+                
 def main():
     if 'loggedIn' not in st.session_state:
         st.session_state.loggedIn = False

@@ -6,6 +6,7 @@ https://prpent-heroku-nlp-classfier-app-1-jm9y0b.streamlit.app/
 example:
 
 donald trump Sends Out Embarrassing New Year’s Eve Message This is Disturbing
+
 News Headlines Category The Federal Reserve Is Coming For Your Next Raise Your own paycheck is a battleground in the fight over inflation POLITICS
 
 Lindsey Graham Must Testify In Georgia Election Investigation, Court Rules Graham, an ally of Donald Trump, had tried to dismiss a subpoena calling for his appearance. POLITICS

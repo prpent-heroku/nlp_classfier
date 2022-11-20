@@ -113,7 +113,7 @@ def home_page_module():
     image = Image.open("Projectimage.jpeg")
     st.image( image , caption='** Classify a News** ' )
     st.subheader("About Application:")
-    st.write("The objective of this project is to create a web application that can consume news headline sentences and provide a classification label to understand what the topic of the news article is and suggest an overall article sentiment.")
+    st.write("The objective of this project is to create a web application with Natural processing language tasks that can consume news headline sentences and provide a classification label to understand what the topic of the news article is and suggest an overall article sentiment.")
     
     st.write("Usefullness: News is all around us through the internet or Television keeping us up to date on the daily events as they happen. There are over 5000 news articles published just in the United States every day. The amount of News articles available to consumers can be overwhelming and requires a process to classify them, this helps the reader to focus on the articles that are of interest to them. This process filters the news articles to an extent but in addition to news topic classification, we would like to provide a suggested sentiment on a news article such that the consumer has an additional piece of information before reading the article and potentially decide on whether to read the article.")
    

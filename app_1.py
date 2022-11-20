@@ -80,6 +80,7 @@ def plot_Top10_category(data):
 
     
 def Visualization():
+    st.header("News Category Statistical Plots")
     st.info("Dataset Information:")
     News = pd.read_json("News_Category_Dataset_v2.json",lines=True)
     st.write(News.head())
@@ -174,7 +175,7 @@ def nlp_task():
              
   
 def  prediction_task():
-    st.info("News Category Prediction")
+    st.header("News Category Prediction")
     with st.form(key='myform',clear_on_submit=True):
         user_headline=st.text_area('Enter your news headline to predict news category')
         submit_button= st.form_submit_button("Predict")

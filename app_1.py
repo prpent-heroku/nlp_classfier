@@ -29,7 +29,7 @@ import warnings
 warnings.filterwarnings('ignore')
 import pickle
 import nltk
-stopword_list = nltk.corpus.stopwords.words('english')
+# stopword_list = nltk.corpus.stopwords.words('english')
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 

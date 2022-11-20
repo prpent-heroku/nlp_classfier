@@ -166,10 +166,29 @@ def nlp_task():
              
   
 def  prediction_task():
-     st.info("News Category Prediction")
-     user_headline=st.text_area('Enter your news headline to predict news category')
-     if(st.button('Predict')):
-         st.success("In Process")      
+    st.info("News Category Prediction")
+    with st.form(key='myform',clear_on_submit=True):
+        user_headline=st.text_area('Enter your news headline to predict news category')
+        submit_button= st.form_submit_button("Predict")
+        message = st.empty()
+        if submit_button:
+            if user_headline == '':
+                message.text("Please Enter a Valid New Headline") 
+            else:
+                message.text("In Process") 
+                tf1 = pickle.load(open("tfidf1.pkl", 'rb'))
+                pickled_model = pickle.load(open('bestmodel.sav', 'rb'))
+                norm_corpus = tn.normalize_corpus(corpus=[user_headline], html_stripping=True, 
+                                      accented_char_removal=True, text_lower_case=True, text_lemmatization=True, 
+                                      text_stemming=False, special_char_removal=True, remove_digits=True,
+                                      stopword_removal=True, stopwords=stopword_list)
+                X_tf1 = tf1.transform(norm_corpus)
+                predictions = pickled_model.predict(X_tf1)
+                Predict_Probability = pickled_model.predict_proba(X_tf1).max(axis=1)   
+                st.caption("Result:")
+                st.write("Topic: ",predictions[0])
+                st.write("Predicted with Probability %:",np.round(Predict_Probability[0]*100,2))
+                message.text("Request Complete")     
 def main():
     if 'loggedIn' not in st.session_state:
         st.session_state.loggedIn = False

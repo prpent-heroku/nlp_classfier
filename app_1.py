@@ -120,57 +120,62 @@ def home_page_module():
     st.write("Build By Fall 2022 NLP Team: Agalya Velusamy, Pravallika Pentapati and Srikanth Bolishetty")
 
 def nlp_task():
-    # Applying TFIDF
-    # vectorizer = TfidfVectorizer(ngram_range = (3,3))
-    # tfidf_model= vectorizer.fit_transform(text)
-    # scores = (tfidf_model.toarray())
-    # features = (vectorizer.get_feature_names())
-    st.title("Natural Language Processing Tasks")
+   st.title("Natural Language Processing Tasks")
     with st.form(key='myform',clear_on_submit=True):
-       raw_text = st.text_area("Enter News Text Here","Type Here")
+       raw_text = st.text_area("Enter Text Here")
        nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
        task_choice = st.selectbox("Choose NLP Task",nlp_task)
        submit_button= st.form_submit_button("Analyze")
     if submit_button:
-         st.info("Original Text::\n{}".format(raw_text))
-         st.info("Orginal NLP task::\n{}".format(task_choice))
-         docx = nlp(raw_text)
-         if task_choice == 'Tokenization':
-             st.caption("Result:")
-             result = [token.text for token in docx ]
-             st.text(result)
-         elif task_choice == 'Lemmatization':
-             st.caption("Result:")
-             result = ["'Token':{},'Lemma':{}".format(token.text,token.lemma_) for token in docx]
-             st.text(result)
-            
-         elif task_choice == 'Named Entity Recognition':
-             sentences=list(docx.sents)
-             st.caption("Result:")
-             entities = [(entity.text,entity.label_)for entity in docx.ents]
-             st.text(entities)
+         if len(raw_text)==0:
+           st.error("Error: Please Enter News Text", icon="🚨")
+         else:
+            st.info("Original Text::\n{}".format(raw_text))
+         if task_choice == "Select NLP Task":
+             st.error("Error: Please Choose NLP Task",icon="🚨")
+         else:
+              st.info("Orginal NLP task::\n{}".format(task_choice))
+         if len(raw_text)!=0:
+         
+             docx = nlp(raw_text)
+             if task_choice == 'Tokenization':
+                 st.caption("Result:")
+                 result = [token.text for token in docx ]
+                 st.json(result)
+             elif task_choice == 'Lemmatization':
+                 st.caption("Result:")
+                 result = ["'Token':{},'Lemma':{}".format(token.text,token.lemma_) for token in docx]
+                 st.json(result)
+
+             elif task_choice == 'Named Entity Recognition':
+                 sentences=list(docx.sents)
+                 st.caption("Result:")
+                 entities = [(entity.text,entity.label_)for entity in docx.ents]
+                 st.json(entities)
+
+             elif task_choice == 'Parts Of Speech Tags':
+                   st.caption("Result:")
+                   result = ["'Token':{},'POS':{},'Dependency':{}".format(word.text,word.tag_,word.dep_) for word in docx]
+                   st.json(result)  
+
+             elif task_choice=='Sentiment Analysis':
+                 analysis = TextBlob(clean_news(raw_text))
+                 st.caption("Result:")
+                 result = analysis.sentiment.polarity
+                 if result > 0.0:
+                     custom_emoji = ':smile:'
+                     st.write("positive",emoji.emojize(custom_emoji))
+                 elif result == 0.0:
+                    st.write("neutral",emoji.emojize(':expressionless:'))
+
+                 else:
+                     custom_emoji = ':disappointed:'
+                     st.write("negative ",emoji.emojize(custom_emoji))
+
+                 st.info("Polarity Score is:: {}".format(result)) 
                 
-         elif task_choice == 'Parts Of Speech Tags':
-               st.caption("Result:")
-               result = ["'Token':{},'POS':{},'Dependency':{}".format(word.text,word.tag_,word.dep_) for word in docx]
-               st.json(result)  
-            
-         elif task_choice=='Sentiment Analysis':
-             analysis = TextBlob(clean_news(raw_text))
-             st.caption("Result:")
-             result = analysis.sentiment.polarity
-             if result > 0.0:
-                 custom_emoji = ':smile:'
-                 st.write("positive",emoji.emojize(custom_emoji))
-             elif result == 0.0:
-                st.write("neutral",emoji.emojize(':expressionless:'))
-               
-             else:
-                 custom_emoji = ':disappointed:'
-                 st.write("negative ",emoji.emojize(custom_emoji))
-                    
-             st.info("Polarity Score is:: {}".format(result)) 
                 
+             
                 
              
   

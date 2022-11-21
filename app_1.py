@@ -121,7 +121,7 @@ def home_page_module():
 
 def nlp_task():
    st.title("Natural Language Processing Tasks")
-    with st.form(key='myform',clear_on_submit=True):
+   with st.form(key='myform',clear_on_submit=True):
        raw_text = st.text_area("Enter Text Here")
        nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
        task_choice = st.selectbox("Choose NLP Task",nlp_task)

@@ -126,7 +126,7 @@ def nlp_task():
        nlp_task = ["Select NLP Task","Tokenization","Lemmatization","Named Entity Recognition","Parts Of Speech Tags","Sentiment Analysis"]
        task_choice = st.selectbox("Choose NLP Task",nlp_task)
        submit_button= st.form_submit_button("Analyze")
-    if submit_button:
+   if submit_button:
          if len(raw_text)==0:
            st.error("Error: Please Enter News Text", icon="🚨")
          else:

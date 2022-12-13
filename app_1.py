@@ -11,8 +11,8 @@ Editors:Pravallika
 
 import streamlit as st 
 import joblib,os
-python -m spacy download en_core_web_sm
-python -m spacy download en
+# python -m spacy download en_core_web_sm
+# python -m spacy download en
 import spacy
 import pandas as pd
 import en_core_web_sm

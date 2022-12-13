@@ -8,8 +8,8 @@ Editors:Pravallika
 """
 # !pip install textblob
 #!pip install wordcloud
-!pip install spacy -q
-!python -m spacy download en_core_web_sm -q
+# !pip install spacy -q
+# !python -m spacy download en_core_web_sm -q
 import streamlit as st 
 import joblib,os
 # python -m spacy download en_core_web_sm

@@ -8,13 +8,13 @@ import collections
 #from textblob import Word
 from nltk.tokenize.toktok import ToktokTokenizer
 from bs4 import BeautifulSoup
-import en_core_web_sm
+# import en_core_web_sm
 
 tokenizer = ToktokTokenizer()
 import nltk
 nltk.download('stopwords')
 stopword_list = nltk.corpus.stopwords.words('english')
-#nlp = spacy.load('en-core-web-sm')
+nlp = spacy.load('en-core-web-sm')
 nlp = en_core_web_sm.load()
 # nlp_vec = spacy.load('en_vectors_web_lg', parse=True, tag=True, entity=True)
 

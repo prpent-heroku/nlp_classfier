@@ -15,7 +15,7 @@ import nltk
 nltk.download('stopwords')
 stopword_list = nltk.corpus.stopwords.words('english')
 nlp = spacy.load('en_core_web_sm')
-nlp = en_core_web_sm.load()
+# nlp = en_core_web_sm.load()
 # nlp_vec = spacy.load('en_vectors_web_lg', parse=True, tag=True, entity=True)
 
 

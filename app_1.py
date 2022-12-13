@@ -15,9 +15,9 @@ import joblib,os
 # python -m spacy download en
 import spacy
 import pandas as pd
-import en_core_web_sm
-nlp=en_core_web_sm.load()
-# nlp = spacy.load('en_core_web_sm')
+# import en_core_web_sm
+# nlp=en_core_web_sm.load()
+nlp = spacy.load('en_core_web_sm')
 import matplotlib.pyplot as plt 
 import matplotlib
 matplotlib.use("Agg")
